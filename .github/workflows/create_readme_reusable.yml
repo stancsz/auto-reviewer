@@ -1,8 +1,6 @@
-# .github/workflows/create_readme_reusable.yml
 name: "Create README for Changed Files"
 
-on:
-  workflow_call:
+on: push
 
 jobs:
   create-readme:
@@ -11,6 +9,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -20,9 +20,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install gitpython
+          pip install gitpython openai
+
+      - name: Fetch Python script
+        run: curl -o create_readme.py https://raw.githubusercontent.com/stancsz/auto-reviewer/main/create_readme.py
 
       - name: Run Python script
         run: python create_readme.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
