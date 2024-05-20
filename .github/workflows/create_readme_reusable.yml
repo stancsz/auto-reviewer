@@ -20,9 +20,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install gitpython
+          pip install gitpython openai
 
       - name: Run Python script
         run: python create_readme.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
