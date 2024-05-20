@@ -23,7 +23,7 @@ jobs:
           pip install gitpython openai
 
       - name: Fetch Python script
-        run: curl -o create_readme.py https://raw.githubusercontent.com/stancsz/auto-reviewer/main/create_readme.py
+        run: curl -o create_readme.py https://raw.githubusercontent.com/stancsz/auto-reviewer/main/create_review.py
 
       - name: Run Python script
         run: python create_readme.py
