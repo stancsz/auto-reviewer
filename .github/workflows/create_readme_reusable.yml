@@ -1,0 +1,28 @@
+# .github/workflows/create_readme_reusable.yml
+name: "Create README for Changed Files"
+
+on:
+  workflow_call:
+
+jobs:
+  create-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install gitpython
+
+      - name: Run Python script
+        run: python create_readme.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
