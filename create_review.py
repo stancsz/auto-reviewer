@@ -55,18 +55,7 @@ for file in changed_files:
     if any(file.endswith(ext) for ext in code_extensions):
         print(f"Processing file: {file}")
         base, ext = os.path.splitext(file)
-        ext_without_dot = ext[1:]  # Remove the leading dot from the extension
-        readme_filename = f"review_{base.replace('.', '_')}_{ext_without_dot}.md"
-        readme_dir = os.path.dirname(readme_filename)
-
-        # Create the directory if it doesn't exist
-        if readme_dir and not os.path.exists(readme_dir):
-            try:
-                os.makedirs(readme_dir, exist_ok=True)
-                print(f"Created directory for README file: {readme_dir}")
-            except OSError as e:
-                print(f"Error creating directory {readme_dir}: {e}")
-                continue
+        readme_filename = f"{base}_review.md"
 
         # Delete the existing README file if it exists
         if os.path.exists(readme_filename):
