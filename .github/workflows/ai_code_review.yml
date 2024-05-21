@@ -1,4 +1,4 @@
-name: "Create README for Changed Files"
+name: "Run AI code reviews"
 
 on: push
 
